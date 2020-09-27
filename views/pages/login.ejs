@@ -1,0 +1,48 @@
+<div class="text-center">
+  <form class="form-signin" action="/login" method="POST">
+    <h2 class="display-4">Login</h2>
+
+    <br />
+
+    <% if(success_message) {%>
+    <div class="alert alert-success">
+      <%= success_message %>
+    </div>
+    <% } %> <% if(error_message) {%>
+    <div class="alert alert-danger" role="alert">
+      <%= error_message %>
+    </div>
+    <% } %>
+
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input
+      type="email"
+      id="inputEmail"
+      name="email"
+      class="form-control"
+      placeholder="Email address"
+      required
+      autofocus
+    />
+    <br />
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input
+      type="password"
+      id="inputPassword"
+      name="password"
+      class="form-control"
+      placeholder="Password"
+      required
+    />
+
+    <br />
+
+    <button class="btn btn-primary" type="submit">
+      Sign in
+    </button>
+  </form>
+</div>
+<br />
+<div class="text-center">
+  Not Registered yet? <a href="/register">Register Now</a>.
+</div>

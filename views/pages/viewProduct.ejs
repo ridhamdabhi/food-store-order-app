@@ -1,0 +1,27 @@
+<h1 class="display-4">Ingredients of <%= productName %></h1>
+
+<table class="table table-bordered" id="productTable">
+  <thread>
+    <tr>
+      <th class="text-center">Ingredient Name</th>
+      <th class="text-center">Quantity in Product</th>
+    </tr>
+  </thread>
+  <tbody>
+    <% productIngredients.forEach(function(ingredient){ %>
+    <tr>
+      <td class="text-center"><%= ingredient.ingredient_name %></td>
+      <td class="text-center"><%= ingredient.quantity %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <form action="/addProduct" method="POST">
+    <input type="hidden" value="<%= productID %>" name="productID" />
+    <input type="hidden" value="<%= productName %>" name="productName" />
+    <input type="hidden" value="<%= productPrice %>" name="productPrice" />
+    <button class="btn btn-primary">Add</button>
+  </form>
+</div>

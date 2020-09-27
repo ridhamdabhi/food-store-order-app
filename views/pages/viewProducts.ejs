@@ -1,0 +1,69 @@
+<h1 class="display-4">Product List</h1>
+
+<input
+  type="text"
+  class="form-control mr-sm-2 col-3"
+  id="productSearch"
+  onkeyup="myFunction()"
+  placeholder="Search Product"
+/>
+<br />
+
+<table class="table table-bordered" id="productTable">
+  <thread>
+    <tr>
+      <th class="text-center">Product Name</th>
+      <th class="text-center">Price</th>
+      <th class="text-center">Action</th>
+    </tr>
+  </thread>
+  <tbody>
+    <% products.forEach(function(product){ %>
+    <tr>
+      <td class="text-center"><%= product.productName %></td>
+      <td class="text-center"><%= product.productPrice %></td>
+      <td class="text-center">
+        <form class="d-inline" action="/viewProduct" method="POST">
+          <input type="hidden" value="<%= product.id %>" name="productID" />
+          <input
+            type="hidden"
+            value="<%= product.productPrice %>"
+            name="productPrice"
+          />
+          <input
+            type="hidden"
+            value="<%= product.productName %>"
+            name="productName"
+          />
+          <button class="btn btn-primary">View</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<!-- Reference from https://www.w3schools.com/howto/howto_js_filter_table.asp -->
+<script>
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("productSearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("productTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>

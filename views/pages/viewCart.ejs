@@ -1,0 +1,43 @@
+<h1 class="display-4">Cart</h1>
+
+<% if(orderItems.length == 0) {%>
+<p class="mb-4">
+  It seems that the cart is empty. You can add products from the link below.
+</p>
+<a href="/viewProducts" class="btn btn-light">View Products</a>
+<% } else{%>
+
+<table class="table table-bordered" id="productTable">
+  <thread>
+    <tr>
+      <th class="text-center">Product Name</th>
+      <th class="text-center">Quantity</th>
+      <th class="text-center">Price</th>
+      <th class="text-center">Total Amount</th>
+      <th class="text-center">Action</th>
+    </tr>
+  </thread>
+  <tbody>
+    <% orderItems.forEach(function(orderItem){ %>
+    <tr>
+      <td class="text-center"><%= orderItem.productName %></td>
+      <td class="text-center"><%= orderItem.qty %></td>
+      <td class="text-center"><%= orderItem.priceEach %></td>
+      <td class="text-center"><%= orderItem.amount %></td>
+      <td class="text-center">
+        <form action="/deleteOrderItem" method="POST">
+          <input type="hidden" value="<%= orderItem.id %>" name="id" />
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <a href="/confirmOrder">
+    <button class="btn btn-primary">Confirm Order</button>
+  </a>
+</div>
+<% }%>
